@@ -1,0 +1,29 @@
+<div class="cat-container"> 
+    <% if @all_orders.exists? %>
+        <div class="cart-number">
+            <h1>Your previous orders:</h1>
+        </div>
+            <% @all_orders.each do |f| %>
+                <div class="order-card">
+                    Order Reference: <%= f.id %>
+                    <br>
+                    Total paid: <%= f.price %>$
+                    <br>
+                    Number of items ordered: <%= f.items.count %>
+                    <br>
+                        <% f.items.each do |item| %>
+                            <%= item.title %>,
+                            <%= item.description %>,
+                            <%= item.price %>
+                            <br>
+                        <% end %>
+                        <br>
+                </div>
+            <% end %>
+
+    <% else %>
+        <div class="cart-number">
+            <h1>You haven't passed any orders yet.</h1>
+        </div>
+    <% end %>
+</div>

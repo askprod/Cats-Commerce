@@ -1,0 +1,14 @@
+class User < ApplicationRecord
+  
+  def make_admin
+    self.update_attribute(:admin, true)
+  end
+  
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  has_many :orders
+  has_one :cart, dependent: :destroy
+end

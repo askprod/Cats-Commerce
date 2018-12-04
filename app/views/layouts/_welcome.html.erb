@@ -1,0 +1,7 @@
+<% if user_signed_in? && current_user.admin? %>
+    <h2>Welcome to your admin page.</h2>
+<% elsif user_signed_in? %>
+    <h2>Welcome <%= current_user.username %></h2>
+<% else %>
+    <h2>Welcome to the Cat Shop! Please <%= link_to "Log-in", new_user_session_path %> or <%= link_to "Sign Up", new_user_registration_path %> to buy our products.</h2>
+<% end %>

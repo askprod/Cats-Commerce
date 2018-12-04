@@ -1,0 +1,33 @@
+<% if user_signed_in? && current_user.admin? %>
+
+<div class="cat-container">
+    <div class="order-card">
+        <h1>Add a new item to the shop:</h1>
+
+        <%= form_for :new, url: home_index_path do |f| %>
+            Name:
+            <br>
+            <%= f.text_field :title %>
+            <br>
+            Description:
+            <br>
+            <%= f.text_field :description %>
+            <br>
+            Price:
+            <br>
+            <%= f.number_field :price, step: :any %>
+            <br><br>
+            Image:
+            <br>
+            <%= f.file_field :picture %>
+            <br><br>
+            <%= f.submit "Create" %>
+        <% end %>
+    </div>
+</div>
+
+<% else %>
+
+    <% controller.redirect_to home_index_path %>
+
+<% end %>

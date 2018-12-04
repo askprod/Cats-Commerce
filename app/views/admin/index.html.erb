@@ -1,0 +1,51 @@
+<div class="cat-container">
+    <div class="cart-number">
+            <br>
+            <h2>Here are all the accounts:</h2>
+                <br>
+            <div class="order-card">
+                <% @all_users.sort_by(&:id).each do |user| %>
+                    <%= user.id %> |
+                    <%= user.email %> |
+                    <%= user.username %> |
+                    <%= user.address %> |
+                    <%= user.first_name %> <%= user.last_name %> |
+                    <%= user.created_at %> |
+                    <%= user.updated_at %> |
+                    <% if user.admin? %>
+                        Admin
+                    <% else %>
+                        User
+                    <% end %>
+                    <br>
+                <% end %>
+                <br>
+            </div>
+        <h2>Here are all the orders:</h2>
+
+            <% if @all_orders.count == 0 %>
+                <br>
+                <h3>No orders processed yet.</h3>
+                <br><br>
+            <% else %>
+                <br>
+                <h3>Total number of orders: <%= @all_orders.count %></h3>
+                <br>
+                <h3>Average order price: <%= @all_orders.average(:price).round(2) %>$</h3>
+            <% end %>
+            <% @all_orders.sort_by(&:id).each do |order| %>
+                <div class="order-card">
+                    Order: <%= order.id %>
+                    <br>
+                    By user: <%= User.find(order.user_id).username %> <%= User.find(order.user_id).email %>
+                    <br>
+                    Number of items ordered: <%= order.items.count %>
+                    <br>
+                    Ordered at: <%= order.created_at %>
+                    <br>
+                    Total payed: <%= order.price %>$
+                    <br><br>
+                </div>
+            <% end %>
+    </div>
+</div>

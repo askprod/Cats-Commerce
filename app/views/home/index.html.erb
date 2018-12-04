@@ -1,0 +1,69 @@
+<div class="cat-container">
+
+    <% if user_signed_in? && current_user.admin? %>
+
+            <% @cats.each do |cat| %>
+                <div class="cat-card">
+                    <%= link_to home_path(cat) do %>
+                        <% if cat.picture.attached? %>
+                            <%= image_tag cat.picture, size: "100" %>
+                        <% else %>
+                            <%= image_tag cat.image_url, size: "100" %>
+                        <% end %>
+                        <br>
+                        Name: <%= cat.title %>
+                        <br>
+                        Price <%= cat.price %>$
+                        <br><br>
+                            <%= link_to "Delete", home_path(:id => cat.id), method: :delete %>
+                        <br><br>
+                    <% end %>
+                </div>
+            <% end %>
+        
+    <% elsif user_signed_in? %>
+
+            <% @cats.each do |cat| %>
+                <div class="cat-card">
+                    <%= link_to home_path(cat) do %>
+                        <% if cat.picture.attached? %>
+                            <%= image_tag cat.picture, size: "300" %>
+                        <% else %>
+                            <%= image_tag cat.image_url, size: "300" %>
+                        <% end %>
+                        <br>
+                        Name: <%= cat.title %>
+                        <br>
+                        Price <%= cat.price %>$
+                        <br>
+                        <br>
+                        <%= link_to "Add to Cart", cart_index_path(:cat_id => cat.id), method: :create %>
+                            <br>
+                    <% end %>
+                </div>
+            <% end %>
+
+    <% else %> 
+
+        <% @cats.each do |cat| %>
+            <div class="cat-card">
+                <%= link_to home_path(cat) do %>
+                    <% if cat.picture.attached? %>
+                        <%= image_tag cat.picture, size: "300" %>
+                    <% else %>
+                        <%= image_tag cat.image_url, size: "300" %>
+                    <% end %>
+                    <br>
+                    Name: <%= cat.title %>
+                    <br>
+                    Price <%= cat.price %>$
+                        <br>
+                        <br>
+                <% end %>
+            </div>
+        <% end %>
+
+    <% end %>
+</div>
+
+

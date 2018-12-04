@@ -1,0 +1,4 @@
+<div class="cart-number">
+    <h1>You successfully paid <strong><%= @final_price %>$</strong>!</h1>
+    <h2> Click <%= link_to "here", order_index_path(:cart => @current_cart), method: :create %> to finalize your order. </h2>
+</div>

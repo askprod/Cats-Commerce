@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ToulouseEcommerce</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if user_signed_in? && current_user.admin? %>
+      <%= render "layouts/navbar_admin" %>
+    <% elsif user_signed_in? %>
+      <%= render "layouts/navbar_user" %>
+    <% else %>
+      <%= render "layouts/navbar_visitor" %>
+    <% end %>
+
+    <div class="center-me">
+      <%= render "layouts/welcome" %>
+    </div>
+
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

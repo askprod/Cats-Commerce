@@ -1,0 +1,23 @@
+<div class="cat-container">
+    <div class="cat-card">
+            <% if @cat_id.picture.attached? %>
+                <%= image_tag @cat_id.picture, size: "300" %>
+            <% else %>
+                <%= image_tag @cat_id.image_url, size: "300" %>
+            <% end %>
+            <br>
+            Name: <%= @cat_id.title %>
+            <br>
+            Description: <%= @cat_id.description %>
+            <br>
+            Price: <%= @cat_id.price %>$
+            <br>
+            <% if signed_in? && current_user.admin? %>
+            <%= link_to "Delete", home_path(:id => @cat_id.id), method: :delete %>
+            <% elsif signed_in? %>
+            <%= link_to "Add to Cart", cart_index_path(:cat_id => @cat_id.id), method: :create %>
+            <% end %>
+        <br><br>
+    </div>
+</div>
+
